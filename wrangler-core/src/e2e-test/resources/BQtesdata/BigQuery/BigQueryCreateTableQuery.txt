@@ -1,0 +1,2 @@
+create table `DATASET.TABLE_NAME` (id STRING, name STRING, email STRING, customer_id STRING,
+ age STRING, address STRING, create_date STRING, time BIGINT, xmldata STRING, hl7data STRING, body STRING, update_date STRING, jsondata STRING, price STRING)
