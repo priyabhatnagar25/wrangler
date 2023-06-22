@@ -15,7 +15,7 @@
 @Wrangler
 Feature:  Wrangler - Run time scenarios
 
-  Scenario: To verify User is able to run a pipeline using the copy,count and delete directives in the wrangler plugin
+  Scenario: To verify User is able to run a pipeline using the copy count and delete directives in the wrangler plugin
     Given Open Datafusion Project to configure pipeline
     Then Click on the Plus Green Button to import the pipelines
     Then Select the json files for importing the pipelines "File1"
@@ -103,6 +103,66 @@ Feature:  Wrangler - Run time scenarios
     Given Open Datafusion Project to configure pipeline
     Then Click on the Plus Green Button to import the pipelines
     Then Select the json files for importing the pipelines "File8"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline using mask number and mask shuffle directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File9"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline using parse date and generate uuid directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File10"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline using decode different date and null empty directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File11"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline using flatten and format as currency directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File12"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline using hash and keep column directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File13"
     Then Rename the pipeline
     Then Deploy the pipeline
     Then Run the Pipeline in Runtime

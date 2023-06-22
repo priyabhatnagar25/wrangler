@@ -20,6 +20,7 @@ import io.cdap.e2e.pages.locators.CdfConnectionLocators;
 import io.cdap.e2e.pages.locators.CdfStudioLocators;
 import io.cdap.e2e.utils.*;
 import io.cdap.plugin.wrangler.locators.WranglerPropertiesPage;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.awt.datatransfer.StringSelection;
@@ -36,18 +37,15 @@ public class WranglerPropertiesPageActions {
     static {
         SeleniumHelper.getPropertiesLocators(WranglerPropertiesPage.class);
     }
+    public static String pipelineName;
 
-    public static void importJsonFiles(String s) throws URISyntaxException {
-        WaitHelper.waitForElementToBeDisplayed(WranglerPropertiesPage.importButton, 30);
-        WebElement chooseFile = (SeleniumDriver.getDriver().findElement(By.xpath(
-                "//input[@id='resource-center-import-pipeline']")));
-        Path importPipeline=Paths.get(WranglerPropertiesPageActions.class.getResource("/"+s).toURI());
-        chooseFile.sendKeys(importPipeline.toString());
-        System.out.println("File is Uploaded Successfully");
+    public static void renameThePipeline() {
+        WranglerPropertiesPageActions.renameThePipeline();
+        WaitHelper.waitForElementToBeOptionallyDisplayed(WranglerPropertiesPage.renamePipeline(),100);
+        ElementHelper.clickOnElement(WranglerPropertiesPage.appendPipeline);
+        pipelineName = "TestPipeline-" + RandomStringUtils.randomAlphanumeric(10);
+        WranglerPropertiesPageActions.fillPipelineNameAndSave(pipelineName);
     }
-
-    public static void clickPlusGreenImportButton() {
-        ElementHelper.clickOnElement(WranglerPropertiesPage.plusGreenButton); }
 
     public static void fillPipelineNameAndSave(String pipelineName) {
         pipelineNameIp(pipelineName);

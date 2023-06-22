@@ -19,10 +19,7 @@ package io.cdap.plugin.wrangler.stepsdesign;
 import io.cdap.e2e.pages.actions.CdfConnectionActions;
 import io.cdap.e2e.pages.actions.CdfStudioActions;
 import io.cdap.e2e.pages.locators.CdfStudioLocators;
-import io.cdap.e2e.utils.CdfHelper;
-import io.cdap.e2e.utils.ElementHelper;
-import io.cdap.e2e.utils.PluginPropertyUtils;
-import io.cdap.e2e.utils.WaitHelper;
+import io.cdap.e2e.utils.*;
 import io.cdap.plugin.wrangler.actions.WranglerPropertiesPageActions;
 import io.cdap.plugin.wrangler.locators.WranglerPropertiesPage;
 import io.cucumber.java.en.Then;
@@ -34,26 +31,14 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static stepsdesign.PipelineSteps.pipelineName;
-
-
 public class Wrangler implements CdfHelper {
 
-    @Then("Click on the Plus Green Button to import the pipelines")
-    public void clickOnPlusGreenImportButton () {
-        WranglerPropertiesPageActions.clickPlusGreenImportButton();
-    }
-
-    @Then("Select the json files for importing the pipelines {string}")
-    public void selectJSONFiles(String path) throws URISyntaxException {
-        WranglerPropertiesPageActions.importJsonFiles(PluginPropertyUtils.pluginProp(path));
+    static {
+        SeleniumHelper.getPropertiesLocators(WranglerPropertiesPage.class);
     }
 
     @Then("Rename the pipeline")
-    public void saveThePipeline() {
-        WaitHelper.waitForElementToBeOptionallyDisplayed(WranglerPropertiesPage.renamePipeline(),100);
-        ElementHelper.clickOnElement(WranglerPropertiesPage.appendPipeline);
-        pipelineName = "TestPipeline-" + RandomStringUtils.randomAlphanumeric(10);
-        WranglerPropertiesPageActions.fillPipelineNameAndSave(pipelineName);
+    public void renameThePipeline() {
+        WranglerPropertiesPageActions.renameThePipeline();
     }
 }

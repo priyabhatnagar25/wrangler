@@ -26,14 +26,6 @@ import org.openqa.selenium.support.How;
  * MySQL source - Properties page - Locators.
  */
 public class WranglerPropertiesPage {
-    @FindBy(how = How.XPATH, using = "//label[@id='import-pipeline']")
-    public static WebElement importButton;
-
-    @FindBy(how = How.XPATH, using = "//img[@id='resource-center-btn']")
-    public static WebElement plusGreenButton;
-
-    @FindBy(how = How.XPATH, using = "//div[@data-cy='pipeline-metadata']")
-    public static WebElement pipelineName;
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"pipeline-name-input\"]")
     public static WebElement pipelineNameIp;
