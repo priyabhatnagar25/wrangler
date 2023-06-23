@@ -170,3 +170,65 @@ Feature:  Wrangler - Run time scenarios
     Then Open and capture logs
     Then Verify the pipeline status is "Succeeded"
     Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline swap and join column directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File14"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline using parse xml as json directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File15"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline using encode base 32 base 64 and set variable directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File16"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline using parse as length,increment variable and split rows directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File17"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+  Scenario: To verify User is able to run a pipeline using parse as simple date directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines "File18"
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+
+
