@@ -15,20 +15,11 @@
  */
 
 package io.cdap.plugin.wrangler.actions;
-
-import io.cdap.e2e.pages.locators.CdfConnectionLocators;
-import io.cdap.e2e.pages.locators.CdfStudioLocators;
-import io.cdap.e2e.utils.*;
+import io.cdap.e2e.utils.ElementHelper;
+import io.cdap.e2e.utils.SeleniumHelper;
+import io.cdap.e2e.utils.WaitHelper;
 import io.cdap.plugin.wrangler.locators.WranglerPropertiesPage;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import java.awt.datatransfer.StringSelection;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static io.cdap.e2e.pages.actions.CdfStudioActions.*;
 
 /**
  * Wrangler - Properties page - Actions.

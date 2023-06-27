@@ -15,21 +15,11 @@ package io.cdap.plugin.wrangler.stepsdesign;
  * the License.
  */
 
-
-import io.cdap.e2e.pages.actions.CdfConnectionActions;
-import io.cdap.e2e.pages.actions.CdfStudioActions;
-import io.cdap.e2e.pages.locators.CdfStudioLocators;
-import io.cdap.e2e.utils.*;
+import io.cdap.e2e.utils.CdfHelper;
+import io.cdap.e2e.utils.SeleniumHelper;
 import io.cdap.plugin.wrangler.actions.WranglerPropertiesPageActions;
 import io.cdap.plugin.wrangler.locators.WranglerPropertiesPage;
 import io.cucumber.java.en.Then;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.WebElement;
-import scala.xml.Elem;
-
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Wrangler implements CdfHelper {
 
