@@ -1,5 +1,5 @@
 {
-    "name": "Wrangler_Directive_Fillemptycells_sendtoerror",
+    "name": "Wrangler_Directive_Fillempty_sendtoerror_1_v3",
     "description": "Data Pipeline Application",
     "artifact": {
         "name": "cdap-data-pipeline",
@@ -42,15 +42,18 @@
                         "scope": "SYSTEM"
                     },
                     "properties": {
-                        "useConnection": "true",
-                        "connection": "${conn(test_1)}",
-                        "dataset": "Wrangler",
-                        "table": "Table5",
-                        "schema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"Customer_id\",\"type\":[\"long\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"long\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]}]}",
-                        "enableQueryingViews": "false"
+                        "useConnection": "false",
+                        "dataset": "test_automation",
+                        "table": "E2E_SOURCE_59605",
+                        "schema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"ID\",\"type\":[\"long\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]}]}",
+                        "enableQueryingViews": "false",
+                        "project": "auto-detect",
+                        "serviceAccountType": "filePath",
+                        "serviceFilePath": "auto-detect",
+                        "datasetProject": "cdf-athena"
                     }
                 },
-                "outputSchema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"Customer_id\",\"type\":[\"long\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"long\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]}]}",
+                "outputSchema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"ID\",\"type\":[\"long\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]}]}",
                 "id": "BigQueryTable",
                 "type": "batchsource",
                 "label": "BigQueryTable",
@@ -68,19 +71,19 @@
                         "scope": "SYSTEM"
                     },
                     "properties": {
-                        "directives": "parse-as-csv :body ',' true\nfill-null-or-empty :Last_name 'Shubhangi'\nsend-to-error empty(Age)",
                         "field": "*",
                         "precondition": "false",
-                        "workspaceId": "9bcb2a1b-e2e1-4da0-bcbb-7483a940163b",
-                        "schema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"Customer_id\",\"type\":[\"string\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"string\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]}]}",
-                        "on-error": "fail-pipeline"
+                        "directives": "parse-as-csv :body ',' true\nfill-null-or-empty :name 'Shubhangi'",
+                        "on-error": "fail-pipeline",
+                        "schema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]}]}",
+                        "workspaceId": "bf1fc2a9-ab8e-4cb7-ae91-7b58f04da2d2"
                     }
                 },
-                "outputSchema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"Customer_id\",\"type\":[\"string\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"string\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]}]}",
+                "outputSchema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]}]}",
                 "inputSchema": [
                     {
                         "name": "BigQueryTable",
-                        "schema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"Customer_id\",\"type\":[\"long\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"long\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]}]}"
+                        "schema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"ID\",\"type\":[\"long\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]}]}"
                     }
                 ],
                 "id": "Wrangler",
@@ -110,15 +113,13 @@
                         "format": "csv",
                         "location": "us",
                         "contentType": "application/octet-stream",
-                        "schema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"Customer_id\",\"type\":[\"string\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"string\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]}]}",
-                        "writeHeader": "true"
+                        "writeHeader": "false"
                     }
                 },
-                "outputSchema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"Customer_id\",\"type\":[\"string\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"string\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]}]}",
                 "inputSchema": [
                     {
                         "name": "Wrangler",
-                        "schema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"Customer_id\",\"type\":[\"string\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"string\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]}]}"
+                        "schema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]}]}"
                     }
                 ],
                 "id": "GCS",
