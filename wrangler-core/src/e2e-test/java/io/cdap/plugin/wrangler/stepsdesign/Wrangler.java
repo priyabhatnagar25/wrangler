@@ -1,4 +1,3 @@
-package io.cdap.plugin.wrangler.stepsdesign;
 /*
  * Copyright © 2023 Cask Data, Inc.
  *
@@ -14,6 +13,7 @@ package io.cdap.plugin.wrangler.stepsdesign;
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+package io.cdap.plugin.wrangler.stepsdesign;
 
 import io.cdap.e2e.utils.CdfHelper;
 import io.cdap.e2e.utils.PluginPropertyUtils;
@@ -38,11 +38,10 @@ public class Wrangler implements CdfHelper {
         WranglerPropertiesPageActions.renameThePipeline();
     }
 
-    @Then("Validate The Data From BQ To BQ With Actual And Expected File")
-    public void ValidateTheDataFromBQToBQWithActualAndExpectedFile() throws IOException, InterruptedException {
+    @Then("Validate The Data From BQ To BQ With Actual And Expected File for: {string}")
+    public void ValidateTheDataFromBQToBQWithActualAndExpectedFileFor(String expectedFile) throws IOException, InterruptedException {
         boolean recordsMatched = BQValidationHelper.validateActualDataToExpectedData(
-          PluginPropertyUtils.pluginProp("bqTargetTable"),
-          PluginPropertyUtils.pluginProp("filepath"));
+          PluginPropertyUtils.pluginProp(expectedFile));
         Assert.assertTrue("Value of records in actual and expected file is equal", recordsMatched);
     }
 
@@ -51,6 +50,6 @@ public class Wrangler implements CdfHelper {
         boolean recordsMatched = GCSValidationHelper.validateActualDataToExpectedData(
           PluginPropertyUtils.pluginProp("filePath"),
           PluginPropertyUtils.pluginProp("bucketName"));
-        Assert.assertTrue("Value of records in actual and expected file is equal", recordsMatched);
+        Assert.assertTrue(recordsMatched);
     }
 }

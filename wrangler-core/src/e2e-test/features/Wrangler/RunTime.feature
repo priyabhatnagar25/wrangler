@@ -19,7 +19,7 @@ Feature:  Wrangler - Run time scenarios
   Scenario: To verify User is able to run a pipeline using the copy count and delete directives in the wrangler plugin
     Given Open Datafusion Project to configure pipeline
     Then Click on the Plus Green Button to import the pipelines
-    Then Select the json files for importing the pipelines "Directive_copy_drop_count_setcolmn"
+    Then Select the json files for importing the pipelines: "Directive_copy_drop_count_setcolumn"
     Then Navigate to the properties page of plugin: "BigQueryTable"
     Then Replace input plugin property: "table" with value: "bqSourceTable"
     Then Close the Plugin Properties page
@@ -38,7 +38,7 @@ Feature:  Wrangler - Run time scenarios
   Scenario: To verify User is able to run a pipeline using the fill null and send to error directives in the wrangler plugin
     Given Open Datafusion Project to configure pipeline
     Then Click on the Plus Green Button to import the pipelines
-    Then Select the json files for importing the pipelines "Directive_Fillempty_sendtoerror"
+    Then Select the json files for importing the pipelines: "Directive_Fillempty_sendtoerror"
     Then Navigate to the properties page of plugin: "BigQueryTable"
     Then Replace input plugin property: "table" with value: "bqSourceTable"
     Then Close the Plugin Properties page
@@ -81,7 +81,7 @@ Feature:  Wrangler - Run time scenarios
   Scenario: To verify User is able to run a pipeline using the find and replace,copy column and calculate length directives in the wrangler plugin
     Given Open Datafusion Project to configure pipeline
     Then Click on the Plus Green Button to import the pipelines
-    Then Select the json files for importing the pipelines "Directive_FindReplace_copy"
+    Then Select the json files for importing the pipelines: "Directive_FindReplace_copy"
     Then Navigate to the properties page of plugin: "BigQuery"
     Then Replace input plugin property: "table" with value: "bqSourceTable"
     Then Close the Plugin Properties page

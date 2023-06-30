@@ -15,8 +15,10 @@
  */
 package io.cdap.plugin.wrangler.actions;
 
+import com.google.cloud.bigquery.FieldValueList;
 import com.google.cloud.bigquery.TableResult;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.cdap.e2e.utils.BigQueryClient;
 import io.cdap.e2e.utils.PluginPropertyUtils;
@@ -24,89 +26,77 @@ import io.cdap.e2e.utils.PluginPropertyUtils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BQValidationHelper {
+  static Gson gson = new Gson();
 
-  static List<JsonObject> BigQueryResponse = new ArrayList<>();
-  static List<Object> bigQueryRows = new ArrayList<>();
-  static List<JsonObject> fileData = new ArrayList<>();
-  static Gson gson=new Gson();
+  private static String fileName = "/Users/bharatgulati/Desktop/Latest_Wrangler/wrangler/wrangler-core/src/e2e-test/resources/ExpectedBigQuery/Expected_DATA";
 
-  private static String fileName = "/Users/bharatgulati/Desktop/WRANGLER/wrangler/wrangler-core/src/e2e-test/resources/ExpectedBigQuery/expectedfile17";
-
-  private static String targetTable="TestTable";
-
-  private static String targetTable2="TestTable9";
-
-  private static String targetTable10="WTestTable10";
-
-  private static String targetTable12="WTestTable12";
-
-  private static String targetTable13="WTestTable13";
-
-  private static String targetTable14="WTestTable14";
-
-  private static String targetTable15="WTestTable16new";
-
-  private static String targetTable16="WTestTable16_2";
-  private static String targetTable17="WTestTable17";
-
-  private static String targetTable18="WTestTable18";
+  private static String targetTable4 = "E2E_TARGET_5411593b_21de_4d2d_8a19_97c9407e8591";
 
   public static void main(String[] args) throws IOException, InterruptedException {
-    validateActualDataToExpectedData(targetTable17,fileName);
+    validateActualDataToExpectedData(fileName);
   }
 
+  public static boolean validateActualDataToExpectedData(String fileName) throws IOException, InterruptedException {
+    Map<String, JsonObject> bigQueryMap = new HashMap<>();
+    Map<String, JsonObject> fileMap = new HashMap<>();
 
-  public static boolean validateActualDataToExpectedData(String targetTable, String fileName) throws IOException,
-    InterruptedException {
-    getBigQueryTableData(targetTable,bigQueryRows);
-    for(Object rows : bigQueryRows) {
-      JsonObject json = gson.fromJson(String.valueOf(rows), JsonObject.class);
-      BigQueryResponse.add(json);
-    }
-    getFileData(fileName);
-    boolean isMatched = matchJsonLists(BigQueryResponse, fileData);
+    getBigQueryTableData(targetTable4, bigQueryMap);
+    getFileData(fileName, fileMap);
+
+    boolean isMatched = matchJsonMaps(bigQueryMap, fileMap);
+
     if (isMatched) {
-      System.out.println("The lists are matched.");
+      System.out.println("The data is matched.");
     } else {
-      System.out.println("The lists are not matched.");
+      System.out.println("The data is not matched.");
     }
+
     return isMatched;
   }
 
-  public static void getFileData(String fileName)
-  {
+  public static void getFileData(String fileName, Map<String, JsonObject> fileMap) {
     try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
       String line;
       while ((line = br.readLine()) != null) {
         JsonObject json = gson.fromJson(line, JsonObject.class);
-        fileData.add(json);
+        String id = json.get("ID").getAsString();
+        fileMap.put(id, json);
       }
     } catch (IOException e) {
       System.err.println("Error reading the file: " + e.getMessage());
     }
-
   }
 
-  private static void getBigQueryTableData(String targetTable,List<Object> bigQueryRows)
+  private static void getBigQueryTableData(String targetTable, Map<String, JsonObject> bigQueryMap)
     throws IOException, InterruptedException {
     String dataset = PluginPropertyUtils.pluginProp("dataset");
     String projectId = PluginPropertyUtils.pluginProp("projectId");
     String selectQuery = "SELECT TO_JSON(t) FROM `" + projectId + "." + dataset + "." + targetTable + "` AS t";
     TableResult result = BigQueryClient.getQueryResult(selectQuery);
-    result.iterateAll().forEach(value -> bigQueryRows.add(value.get(0).getValue()));
 
+    for (FieldValueList row : result.iterateAll()) {
+      JsonObject json = gson.fromJson(row.get(0).getStringValue(), JsonObject.class);
+      JsonElement idElement = json.get("ID");
+      if (idElement != null && idElement.isJsonPrimitive()) {
+        String id = idElement.getAsString(); // Replace "id" with the actual key in the JSON
+        bigQueryMap.put(id, json);
+      } else {
+        System.out.println("Data Mismatched");
+      }
+    }
   }
-  private static boolean matchJsonLists(List<JsonObject> list1, List<JsonObject> list2) {
-    if (list1.size() != list2.size()) {
+
+  private static boolean matchJsonMaps(Map<String, JsonObject> map1, Map<String, JsonObject> map2) {
+    if (!map1.keySet().equals(map2.keySet())) {
       return false;
     }
-    for (int i = 0; i < list1.size(); i++) {
-      JsonObject json1 = list1.get(i);
-      JsonObject json2 = list2.get(i);
+    for (String key : map1.keySet()) {
+      JsonObject json1 = map1.get(key);
+      JsonObject json2 = map2.get(key);
       if (!json1.equals(json2)) {
         return false;
       }
