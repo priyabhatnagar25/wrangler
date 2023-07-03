@@ -31,8 +31,7 @@ public class WranglerPropertiesPageActions {
     public static String pipelineName;
 
     public static void renameThePipeline() {
-        WranglerPropertiesPageActions.renameThePipeline();
-        WaitHelper.waitForElementToBeOptionallyDisplayed(WranglerPropertiesPage.renamePipeline(),100);
+        WaitHelper.waitForElementToBeOptionallyDisplayed(WranglerPropertiesPage.renamePipeline(), 100);
         ElementHelper.clickOnElement(WranglerPropertiesPage.appendPipeline);
         pipelineName = "TestPipeline-" + RandomStringUtils.randomAlphanumeric(10);
         WranglerPropertiesPageActions.fillPipelineNameAndSave(pipelineName);

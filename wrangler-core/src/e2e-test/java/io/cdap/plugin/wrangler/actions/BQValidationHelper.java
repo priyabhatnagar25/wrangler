@@ -30,11 +30,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BQValidationHelper {
-  static Gson gson = new Gson();
+  private static final Gson gson = new Gson();
 
-  private static String fileName = "/Users/bharatgulati/Desktop/Latest_Wrangler/wrangler/wrangler-core/src/e2e-test/resources/ExpectedBigQuery/Expected_DATA";
+  private static final String fileName = "wrangler-core/src/e2e-test/resources/ExpectedBigQuery/expectedFile3";
 
-  private static String targetTable4 = "E2E_TARGET_5411593b_21de_4d2d_8a19_97c9407e8591";
+  private static final String targetTable4 = "bqTargetTable26";
 
   public static void main(String[] args) throws IOException, InterruptedException {
     validateActualDataToExpectedData(fileName);
@@ -88,6 +88,7 @@ public class BQValidationHelper {
         System.out.println("Data Mismatched");
       }
     }
+    System.out.println(bigQueryMap);
   }
 
   private static boolean matchJsonMaps(Map<String, JsonObject> map1, Map<String, JsonObject> map2) {

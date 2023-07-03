@@ -34,7 +34,7 @@ public class Wrangler implements CdfHelper {
     }
 
     @Then("Rename the pipeline")
-    public void renameThePipeline() {
+    public void renameThePipelineStep() {
         WranglerPropertiesPageActions.renameThePipeline();
     }
 
