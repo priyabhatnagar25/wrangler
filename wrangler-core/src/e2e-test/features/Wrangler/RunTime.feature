@@ -315,3 +315,103 @@ Feature:  Wrangler - Run time scenarios
     Then Verify the pipeline status is "Succeeded"
     Then Close the pipeline logs
     Then Validate The Data From BQ To BQ With Actual And Expected File for: "ExpectedDirective_parse_simpledate"
+
+  @BQ_SOURCE_TEST @BQ_SINK_TEST
+  Scenario: To verify User is able to run a pipeline using parse as datetime directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines for the plugin "Directive_parse_datetime"
+    Then Navigate to the properties page of plugin: "BigQuery"
+    Then Replace input plugin property: "dataset" with value: "dataset"
+    Then Replace input plugin property: "table" with value: "bqSourceTable"
+    Then Click on the Get Schema button
+    Then Click on the Validate button
+    Then Close the Plugin Properties page
+    Then Navigate to the properties page of plugin: "BigQuery2"
+    Then Replace input plugin property: "table" with value: "bqTargetTable"
+    Then Replace input plugin property: "dataset" with value: "dataset"
+    Then Click on the Validate button
+    Then Close the Plugin Properties page
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+    Then Validate The Data From BQ To BQ With Actual And Expected File for: "ExpectedDirective_parse_datetime"
+
+  @BQ_SOURCE_TEST @BQ_SINK_TEST
+  Scenario: To verify User is able to run a pipeline using parse as datetime directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines for the plugin "Directive_parse_HL7"
+    Then Navigate to the properties page of plugin: "BigQueryTable"
+    Then Replace input plugin property: "dataset" with value: "dataset"
+    Then Replace input plugin property: "table" with value: "bqSourceTable"
+    Then Click on the Get Schema button
+    Then Click on the Validate button
+    Then Close the Plugin Properties page
+    Then Navigate to the properties page of plugin: "BigQuery2"
+    Then Replace input plugin property: "table" with value: "bqTargetTable"
+    Then Replace input plugin property: "dataset" with value: "dataset"
+    Then Click on the Validate button
+    Then Close the Plugin Properties page
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+    Then Validate The Data From BQ To BQ With Actual And Expected File for: "ExpectedDirective_parse_HL7"
+
+  @BQ_SOURCE_TEST @BQ_SINK_TEST
+  Scenario: To verify User is able to run a pipeline using parse as datetime directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines for the plugin "Directive_parse_json"
+    Then Navigate to the properties page of plugin: "BigQueryTable"
+    Then Replace input plugin property: "dataset" with value: "dataset"
+    Then Replace input plugin property: "table" with value: "bqSourceTable"
+    Then Click on the Get Schema button
+    Then Click on the Validate button
+    Then Close the Plugin Properties page
+    Then Navigate to the properties page of plugin: "BigQuery2"
+    Then Replace input plugin property: "table" with value: "bqTargetTable"
+    Then Replace input plugin property: "dataset" with value: "dataset"
+    Then Click on the Validate button
+    Then Close the Plugin Properties page
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+    Then Validate The Data From BQ To BQ With Actual And Expected File for: "ExpectedDirective_parse_json"
+
+  @BQ_SOURCE_TEST @BQ_SINK_TEST
+  Scenario: To verify User is able to run a pipeline using parse as datetime directives in the wrangler plugin
+    Given Open Datafusion Project to configure pipeline
+    Then Click on the Plus Green Button to import the pipelines
+    Then Select the json files for importing the pipelines for the plugin "Directive_parse_xml"
+    Then Navigate to the properties page of plugin: "BigQueryTable"
+    Then Replace input plugin property: "dataset" with value: "dataset"
+    Then Replace input plugin property: "table" with value: "bqSourceTable"
+    Then Click on the Get Schema button
+    Then Click on the Validate button
+    Then Close the Plugin Properties page
+    Then Navigate to the properties page of plugin: "BigQuery2"
+    Then Replace input plugin property: "table" with value: "bqTargetTable"
+    Then Replace input plugin property: "dataset" with value: "dataset"
+    Then Click on the Validate button
+    Then Close the Plugin Properties page
+    Then Rename the pipeline
+    Then Deploy the pipeline
+    Then Run the Pipeline in Runtime
+    Then Wait till pipeline is in running state
+    Then Open and capture logs
+    Then Verify the pipeline status is "Succeeded"
+    Then Close the pipeline logs
+    Then Validate The Data From BQ To BQ With Actual And Expected File for: "ExpectedDirective_parse_xml"
