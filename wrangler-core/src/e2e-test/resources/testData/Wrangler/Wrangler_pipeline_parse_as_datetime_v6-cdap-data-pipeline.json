@@ -1,5 +1,5 @@
 {
-    "name": "Wrangler_pipeline_parse_as_datetime_v3",
+    "name": "Wrangler_pipeline_parse_as_datetime_v6",
     "description": "Data Pipeline Application",
     "artifact": {
         "name": "cdap-data-pipeline",
@@ -109,17 +109,18 @@
                         "serviceFilePath": "auto-detect",
                         "referenceName": "test",
                         "dataset": "Wrangler",
-                        "table": "Table18jul_1",
+                        "table": "Table1aug",
                         "operation": "insert",
                         "truncateTable": "false",
                         "allowSchemaRelaxation": "false",
                         "location": "US",
                         "createPartitionedTable": "false",
                         "partitioningType": "TIME",
-                        "partitionFilterRequired": "false"
+                        "partitionFilterRequired": "false",
+                        "schema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"ID\",\"type\":[\"long\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]},{\"name\":\"Customer_id\",\"type\":[\"string\",\"null\"]},{\"name\":\"create_date\",\"type\":[{\"type\":\"string\",\"logicalType\":\"datetime\"},\"null\"]},{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"long\",\"null\"]},{\"name\":\"Col1\",\"type\":[\"string\",\"null\"]},{\"name\":\"update_date\",\"type\":[{\"type\":\"int\",\"logicalType\":\"date\"},\"null\"]}]}"
                     }
                 },
-                "outputSchema": "",
+                "outputSchema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"ID\",\"type\":[\"long\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]},{\"name\":\"Customer_id\",\"type\":[\"string\",\"null\"]},{\"name\":\"create_date\",\"type\":[{\"type\":\"string\",\"logicalType\":\"datetime\"},\"null\"]},{\"name\":\"body\",\"type\":[\"string\",\"null\"]},{\"name\":\"First_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Last_name\",\"type\":[\"string\",\"null\"]},{\"name\":\"Address\",\"type\":[\"string\",\"null\"]},{\"name\":\"Age\",\"type\":[\"long\",\"null\"]},{\"name\":\"Col1\",\"type\":[\"string\",\"null\"]},{\"name\":\"update_date\",\"type\":[{\"type\":\"int\",\"logicalType\":\"date\"},\"null\"]}]}",
                 "inputSchema": [
                     {
                         "name": "Wrangler",
