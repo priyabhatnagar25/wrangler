@@ -1,0 +1,147 @@
+{
+    "name": "Wrangler_pipeline_parse_as_json_v2",
+    "description": "Data Pipeline Application",
+    "artifact": {
+        "name": "cdap-data-pipeline",
+        "version": "6.9.0-SNAPSHOT",
+        "scope": "SYSTEM"
+    },
+    "config": {
+        "resources": {
+            "memoryMB": 2048,
+            "virtualCores": 1
+        },
+        "driverResources": {
+            "memoryMB": 2048,
+            "virtualCores": 1
+        },
+        "connections": [
+            {
+                "from": "BigQuery",
+                "to": "Wrangler"
+            },
+            {
+                "from": "Wrangler",
+                "to": "BigQuery2"
+            }
+        ],
+        "postActions": [],
+        "properties": {},
+        "processTimingEnabled": true,
+        "stageLoggingEnabled": true,
+        "stages": [
+            {
+                "name": "BigQuery",
+                "plugin": {
+                    "name": "BigQueryTable",
+                    "type": "batchsource",
+                    "label": "BigQuery",
+                    "artifact": {
+                        "name": "google-cloud",
+                        "version": "0.22.0-SNAPSHOT",
+                        "scope": "SYSTEM"
+                    },
+                    "properties": {
+                        "useConnection": "false",
+                        "project": "auto-detect",
+                        "serviceAccountType": "filePath",
+                        "serviceFilePath": "auto-detect",
+                        "referenceName": "Test",
+                        "dataset": "Wrangler",
+                        "table": "JSONTABLEparser",
+                        "enableQueryingViews": "false",
+                        "schema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"string_field_0\",\"type\":[\"string\",\"null\"]}]}"
+                    }
+                },
+                "outputSchema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"string_field_0\",\"type\":[\"string\",\"null\"]}]}",
+                "id": "BigQuery",
+                "type": "batchsource",
+                "label": "BigQuery",
+                "icon": "fa-plug"
+            },
+            {
+                "name": "Wrangler",
+                "plugin": {
+                    "name": "Wrangler",
+                    "type": "transform",
+                    "label": "Wrangler",
+                    "artifact": {
+                        "name": "wrangler-transform",
+                        "version": "4.9.0-SNAPSHOT",
+                        "scope": "SYSTEM"
+                    },
+                    "properties": {
+                        "field": "*",
+                        "precondition": "false",
+                        "directives": "parse-as-json :string_field_0 1",
+                        "on-error": "fail-pipeline",
+                        "schema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"string_field_0_id\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_name\",\"type\":{\"type\":\"record\",\"name\":\"string_field_0_name05F0DF247CD8481657781C26E1595028\",\"fields\":[{\"name\":\"first\",\"type\":[\"string\",\"null\"]},{\"name\":\"last\",\"type\":[\"string\",\"null\"]}]}},{\"name\":\"string_field_0_age\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_weigth\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_height\",\"type\":[\"double\",\"null\"]}]}",
+                        "workspaceId": "15c031ec-5a1a-4e09-b71b-941ba3933e4f"
+                    }
+                },
+                "outputSchema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"string_field_0_id\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_name\",\"type\":{\"type\":\"record\",\"name\":\"string_field_0_name05F0DF247CD8481657781C26E1595028\",\"fields\":[{\"name\":\"first\",\"type\":[\"string\",\"null\"]},{\"name\":\"last\",\"type\":[\"string\",\"null\"]}]}},{\"name\":\"string_field_0_age\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_weigth\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_height\",\"type\":[\"double\",\"null\"]}]}",
+                "inputSchema": [
+                    {
+                        "name": "BigQuery",
+                        "schema": "{\"type\":\"record\",\"name\":\"output\",\"fields\":[{\"name\":\"string_field_0\",\"type\":[\"string\",\"null\"]}]}"
+                    }
+                ],
+                "id": "Wrangler",
+                "type": "transform",
+                "label": "Wrangler",
+                "icon": "icon-DataPreparation"
+            },
+            {
+                "name": "BigQuery2",
+                "plugin": {
+                    "name": "BigQueryTable",
+                    "type": "batchsink",
+                    "label": "BigQuery2",
+                    "artifact": {
+                        "name": "google-cloud",
+                        "version": "0.22.0-SNAPSHOT",
+                        "scope": "SYSTEM"
+                    },
+                    "properties": {
+                        "useConnection": "false",
+                        "project": "cdf-athena",
+                        "serviceAccountType": "filePath",
+                        "serviceFilePath": "auto-detect",
+                        "referenceName": "test",
+                        "dataset": "Wrangler",
+                        "table": "Table14jul1_2",
+                        "operation": "insert",
+                        "truncateTable": "false",
+                        "allowSchemaRelaxation": "false",
+                        "location": "US",
+                        "createPartitionedTable": "false",
+                        "partitioningType": "TIME",
+                        "partitionFilterRequired": "false",
+                        "schema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"string_field_0_id\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_name\",\"type\":{\"type\":\"record\",\"name\":\"string_field_0_name05F0DF247CD8481657781C26E1595028\",\"fields\":[{\"name\":\"first\",\"type\":[\"string\",\"null\"]},{\"name\":\"last\",\"type\":[\"string\",\"null\"]}]}},{\"name\":\"string_field_0_age\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_weigth\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_height\",\"type\":[\"double\",\"null\"]}]}"
+                    }
+                },
+                "outputSchema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"string_field_0_id\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_name\",\"type\":{\"type\":\"record\",\"name\":\"string_field_0_name05F0DF247CD8481657781C26E1595028\",\"fields\":[{\"name\":\"first\",\"type\":[\"string\",\"null\"]},{\"name\":\"last\",\"type\":[\"string\",\"null\"]}]}},{\"name\":\"string_field_0_age\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_weigth\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_height\",\"type\":[\"double\",\"null\"]}]}",
+                "inputSchema": [
+                    {
+                        "name": "Wrangler",
+                        "schema": "{\"type\":\"record\",\"name\":\"record\",\"fields\":[{\"name\":\"string_field_0_id\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_name\",\"type\":{\"type\":\"record\",\"name\":\"string_field_0_name05F0DF247CD8481657781C26E1595028\",\"fields\":[{\"name\":\"first\",\"type\":[\"string\",\"null\"]},{\"name\":\"last\",\"type\":[\"string\",\"null\"]}]}},{\"name\":\"string_field_0_age\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_weigth\",\"type\":[\"long\",\"null\"]},{\"name\":\"string_field_0_height\",\"type\":[\"double\",\"null\"]}]}"
+                    }
+                ],
+                "id": "BigQuery2",
+                "type": "batchsink",
+                "label": "BigQuery2",
+                "icon": "fa-plug"
+            }
+        ],
+        "schedule": "0 1 */1 * *",
+        "engine": "spark",
+        "numOfRecordsPreview": 100,
+        "rangeRecordsPreview": {
+            "min": 1,
+            "max": "5000"
+        },
+        "description": "Data Pipeline Application",
+        "maxConcurrentRuns": 1
+    },
+    "version": "-SNAPSHOT"
+}
